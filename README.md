@@ -19,18 +19,26 @@ $ sudo yum remove docker \
                   docker-selinux \
                   docker-engine-selinux \
                   docker-engine
+
+
 安装一些必要的系统工具：
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
 添加软件源信息：
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
 更新 yum 缓存：
 sudo yum makecache fast
+
 安装 Docker-ce：
 sudo yum -y install docker-ce
+
 启动 Docker 后台服务
 sudo systemctl start docker
+
 测试运行 hello-world
 [root@runoob ~]# docker run hello-world
+
 
 开机启动
 2.systemctl enable docker.service
@@ -60,8 +68,10 @@ docker –d run [名称/image id]
 docker run -p 81:80 -d [nginx/image id]
 -p：指定端口 ， 81端口为暴露在外部的端口， 80为nginx自身端口
 -d:后台运行
+
 删除指定镜像,(前提是没有使用镜像的容器，容器包括正在运行和已经停止)
 docker rmi [image id]
+
 容器操作
 查看所有容器，包括已经停用的
 docker ps -a
@@ -91,9 +101,11 @@ docker logs 2b1b7a428627
 解决办法：
 # vim  /usr/lib/sysctl.d/00-system.conf
 1
+
 添加如下代码：
 net.ipv4.ip_forward=1
 1
+
 重启network服务
 # systemctl restart network
 
@@ -112,6 +124,8 @@ https://blog.csdn.net/ncdx111/article/details/79984379
 
 3、idea打包镜像
 采用插件一步打包发布本地的Maven项目为远程主机的Docker镜像，之前的docker-maven-plugin已经被废弃， dockerfile-maven-plugin是其替代，我们将采用最新的dockerfile-maven-plugin插件，正常打包就可以同步打包docker镜像，并上传docker 私有仓库
+
+
 项目pom中添加如下配置：
 <properties>
     <java.version>1.8</java.version>
@@ -145,8 +159,12 @@ https://blog.csdn.net/ncdx111/article/details/79984379
     </configuration>
 </plugin>
 
+
 4、添加Dockerfile到项目根目录
+
 内容如下：
+
+
 FROM openjdk:8-jdk-alpine
 #定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。
 VOLUME /tmp
@@ -162,10 +180,8 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 
 
-
-
-
 5、开启docker远程连接
+
 编辑docker文件：
 vim /usr/lib/systemd/system/docker.service
 修改ExecStart，将内容修改为下面内容
