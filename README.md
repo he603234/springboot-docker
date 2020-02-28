@@ -1,8 +1,9 @@
 # springboot-docker
+
 打包springboot项目的同时，同步打包镜像到docker容器中
 
-
-一、Docker的安装与使用
+# 一、Docker的安装与使用
+## Docker安装
 
 Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
 通过 uname -r 命令查看你当前的内核版本
@@ -47,7 +48,7 @@ sudo systemctl start docker
 $ sudo yum remove docker-ce
 $ sudo rm -rf /var/lib/docker
 
-二、docker使用
+## docker使用
 镜像操作
 查看运行容器
 docker ps
@@ -99,20 +100,15 @@ docker logs 2b1b7a428627
 常见问题：
 1、docker容器运行后无法访问，报异常WARNING: IPv4 forwarding is disabled. Networking will not work.
 解决办法：
-# vim  /usr/lib/sysctl.d/00-system.conf
-1
-
+vim  /usr/lib/sysctl.d/00-system.conf
 添加如下代码：
 net.ipv4.ip_forward=1
-1
-
 重启network服务
-# systemctl restart network
+systemctl restart network
 
 
 
-
-二、Idea打包docker镜像并推送到远程docker容器中
+# 二、Idea打包docker镜像并推送到远程docker容器中
 
 
 1、windows7安装docker
@@ -164,19 +160,19 @@ https://blog.csdn.net/ncdx111/article/details/79984379
 
 内容如下：
 
-
+指定基础镜像
 FROM openjdk:8-jdk-alpine
-#定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。
+定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。
 VOLUME /tmp
-#定义构建时需要的参数
+定义构建时需要的参数
 ARG JAR_FILE
-#复制本地工程 至 容器里指定的路径，项目为app.jar
+复制本地工程 至 容器里指定的路径，项目为app.jar
 COPY ${JAR_FILE} app.jar
-#镜像自身端口，非服务对外端口，需要运行镜像时映射对外端口
+镜像自身端口，非服务对外端口，需要运行镜像时映射对外端口
 EXPOSE 8080
-#启动命令及环境变量
+启动命令及环境变量
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-位置如下：
+
 
 
 
