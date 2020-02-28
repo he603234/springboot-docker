@@ -173,7 +173,11 @@ EXPOSE 8080
 启动命令及环境变量
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
-
+5、设置本地环境变量【重要】
+设置系统环境变量
+DOCKER_HOST=tcp://192.168.88.135:2375
+tcp://192.168.88.135:2375为远程docker服务地址
+进入cmd，执行命令使环境变量立即生效：echo % DOCKER_HOST %，
 
 
 5、开启docker远程连接
@@ -189,11 +193,9 @@ systemctl daemon-reload  //重启守护服务
 systemctl restart docker //重启docke
 
 
-
-
 7、idea中执行命令，生成docker镜像并推送到远程docker
 运行命令：mvn clean package -U
 或者点击maven 打包插件 “package”
-
+如果出现链接不成功，需要重启本地电脑（刚刚本地配置的DOCKER_HOST有时不会立刻生效，重启电脑后即可，亲测）
 
 9、进入docker服务，使用命令docker images查看刚刚上传的镜像，之后运行即可；
