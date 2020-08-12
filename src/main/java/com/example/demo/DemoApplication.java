@@ -14,8 +14,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-@Value("${project.name}")
-private String projectName;
+private String projectName = "springboot-docker";
 
     @GetMapping("/")
     public  String index(){
