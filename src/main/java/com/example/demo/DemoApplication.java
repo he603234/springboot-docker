@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +14,12 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+@Value("${project.name}")
+private String projectName;
 
     @GetMapping("/")
     public  String index(){
-        return "this is ok";
+        return "this is "+projectName+",status is ok!";
     }
 
 }

@@ -54,10 +54,10 @@
                     <execution>
                         <id>default</id>
                         <!--如果package时不想用打包镜像并推送至docker,就注释掉这个goal-->
-                        <goals>
+                      <!--  <goals>
                             <goal>build</goal>
                             <goal>push</goal>
-                        </goals>
+                        </goals>-->
                     </execution>
                 </executions>
                 <!--镜像信息配置、REPOSITORY、TAG-->
