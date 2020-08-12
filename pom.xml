@@ -48,12 +48,12 @@
             <!--docker插件-->
             <plugin>
                 <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
+                <artifactId>dockerfile-maven-plugin</artifactId><!--dockerfile-maven-plugin 为最新插件-->
                 <version>1.4.9</version>
                 <executions>
                     <execution>
                         <id>default</id>
-                        <!--如果package时不想用docker打包,就注释掉这个goal-->
+                        <!--如果package时不想用打包镜像并推送至docker,就注释掉这个goal-->
                         <goals>
                             <goal>build</goal>
                             <goal>push</goal>
